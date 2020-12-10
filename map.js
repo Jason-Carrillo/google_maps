@@ -1,0 +1,1 @@
+const mapLink = "https://maps.googleapis.com/maps/api/js?key=" + mapCode + "&callback=initMap";
