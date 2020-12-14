@@ -12,24 +12,42 @@
 </head>
 <body>
 
-<div id="map" style="float:left;width:70%;height:100%"></div>
-<div id="directionsPanel" style="float:right;width:30%;height:100%"></div>
+<div id="map"></div>
+<div id="right-panel">
+    <div>
+        <b>Start:</b>
+        <input id="start">
 
-<div>
-    <strong>Start: </strong>
-    <select id="start" onchange="calcRoute();">
-        <option value="dallas, tx">Dallas</option>
-        <option value="los angeles, ca">Los Angeles</option>
-        <option value="dallas, tx">Dallas</option>
 
-    </select>
-    <strong>End: </strong>
-    <select id="end" onchange="calcRoute();">
-        <option value="el paso, tx">El Paso</option>
-        <option value="dallas, tx">Dallas</option>
+        </input>
+        <br />
+        <b>Waypoints:</b> <br />
 
-    </select>
+        <select multiple id="waypoints">
+            <option value="Las Cruces, NM">Las Cruces, NM</option>
+            <option value="Ruidoso, NM">Ruidoso, NM</option>
+            <option value="Alamgordo, NM">Alamogordo, NM</option>
+            <option value="San Marcos, TX">San Marcos, TX</option>
+            <option value="Johnson City, TX">Johnson City, TX</option>
+
+        </select>
+        <br />
+        <b>End:</b>
+        <input id="end">
+
+
+
+
+
+        </input>
+        <br />
+        <input type="submit" id="submit" />
+    </div>
+    <div id="directions-panel"></div>
 </div>
+
+<button id="converse">Converse</button>
+<button id="El_Paso">El Paso</button>
 
 
 </body>
