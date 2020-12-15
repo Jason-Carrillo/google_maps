@@ -140,8 +140,8 @@ var markers = [];
 
 function initMap() {
 
-    var latitude = 27.7172453; // YOUR LATITUDE VALUE
-    var longitude = 85.3239605; // YOUR LONGITUDE VALUE
+    var latitude = 34.7062978; // YOUR LATITUDE VALUE
+    var longitude = -116.1274117; // YOUR LONGITUDE VALUE
 
     var myLatLng = {lat: 34.7062978, lng: -116.1274117};
 
@@ -179,20 +179,6 @@ function initMap() {
         document.getElementById('longclicked').innerHTML =  event.latLng.lng();
     });
 
-    // Create new marker on double click event on the map
-    google.maps.event.addListener(map,'dblclick',function(event) {
-        var marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map,
-            title: event.latLng.lat()+', '+event.latLng.lng()
-        });
-
-        // Update lat/long value of div when the marker is clicked
-        marker.addListener('click', function() {
-            document.getElementById('latclicked').innerHTML = event.latLng.lat();
-            document.getElementById('longclicked').innerHTML =  event.latLng.lng();
-        });
-    });
 
     // Create new marker on single click event on the map
     google.maps.event.addListener(map,'click',function(event) {
@@ -212,14 +198,14 @@ function initMap() {
 
 }
 
-// Adds a marker to the map and push to the array.
-function addMarker(location) {
-    var marker = new google.maps.Marker({
-        position: location,
-        map: map
-    });
-
-}
+// // Adds a marker to the map and push to the array.
+// function addMarker(location) {
+//     var marker = new google.maps.Marker({
+//         position: location,
+//         map: map
+//     });
+//
+// }
 
 
 
