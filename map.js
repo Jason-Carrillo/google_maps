@@ -182,6 +182,7 @@ function initMap() {
         markers.push(obj);
         Object.assign(objLoc, obj)
 
+
         console.log(objLoc)
         console.log(markers)
     });
@@ -191,7 +192,12 @@ function initMap() {
 
 var realPoints = [{lat: 34.70171128524146, lng: -116.14878354404999}, {lat: 34.70324799225423, lng: -116.141402104841}, {lat: 34.70120165679538, lng: -116.12518010471894}, {lat: 34.705929320728494, lng: -116.1165112051828}]
 
-var mapRealPoints = realPoints.map(n => '{location: ' + n + '}');
+
+// THIS WILL TURN COORDINATES THAT WHERE ENTERED INTO LOCATION FORMAT TO BE USED IN THE "displayRoute()" function
+var mapRealPoints = realPoints.map(n => {
+    const objTest = { location: n};
+    return objTest
+});
 
 console.log(mapRealPoints)
 
