@@ -202,7 +202,11 @@ function initMap() {
           title: event.latLng.lat()+', '+event.latLng.lng()
 
         });
-        markers.push("Latitutde: " + event.latLng.lat() +" Longitude: "+ event.latLng.lng());
+        var obj = {};
+        obj["Latitude"] = event.latLng.lat();
+        obj["Longitude"] = event.latLng.lng();
+        markers.push(obj);
+        console.log(markers)
     });
 
 
@@ -216,6 +220,7 @@ function addMarker(location) {
     });
 
 }
+
 
 
 // SEARCH FOR CITY WITH WAYPOINTS IN BETWEEN
