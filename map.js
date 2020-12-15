@@ -45,59 +45,90 @@
 //
 // }
 
+// function initMap() {
+//     const map = new google.maps.Map(document.getElementById("map"), {
+//         zoom: 4,
+//         center: { lat: 32.8205865, lng: -96.8716371 },
+//     });
+//     const directionsService = new google.maps.DirectionsService();
+//     const directionsRenderer = new google.maps.DirectionsRenderer({
+//         draggable: true,
+//         map,
+//         panel: document.getElementById("right-panel"),
+//     });
+//     directionsRenderer.addListener("directions_changed", () => {
+//         computeTotalDistance(directionsRenderer.getDirections());
+//     });
+//     displayRoute(
+//         "Ozona, TX",
+//         "Sheffield, TX",
+//         directionsService,
+//         directionsRenderer
+//     );
+// }
+//
+// var testPoints = [ {location:{lat: 30.8756133, lng: -101.571342 }},{location: {lat: 30.8650913, lng: -101.6466300}},{ location: {lat: 30.739580, lng:-101.659839}}]
+//
+// function displayRoute(origin, destination, service, display) {
+//     service.route(
+//         {
+//             origin: origin,
+//             destination: destination,
+//             waypoints: testPoints,
+//             travelMode: google.maps.TravelMode.DRIVING,
+//             avoidTolls: true,
+//         },
+//         (result, status) => {
+//             if (status === "OK") {
+//                 display.setDirections(result);
+//             } else {
+//                 alert("Could not display directions due to: " + status);
+//             }
+//         }
+//     );
+// }
+
+// function computeTotalDistance(result) {
+//     let total = 0;
+//     const myroute = result.routes[0];
+//
+//     for (let i = 0; i < myroute.legs.length; i++) {
+//         total += myroute.legs[i].distance.value;
+//     }
+//     total = total / 1000;
+//     document.getElementById("total").innerHTML = total + " km";
+// }
+
+var map;
+var markers = [];
+
 function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: { lat: 32.8205865, lng: -96.8716371 },
+    var lat_lng = {lat: 34.7062978, lng:  -116.1274117};
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: lat_lng,
+        mapTypeId: google.maps.MapTypeId.TERRAIN
     });
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable: true,
-        map,
-        panel: document.getElementById("right-panel"),
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function(event) {
+        addMarker(event.latLng);
     });
-    directionsRenderer.addListener("directions_changed", () => {
-        computeTotalDistance(directionsRenderer.getDirections());
-    });
-    displayRoute(
-        "Ozona, TX",
-        "Sheffield, TX",
-        directionsService,
-        directionsRenderer
-    );
+
+    // Adds a marker at the center of the map.
+    addMarker(lat_lng);
 }
 
-var testPoints = [ {location:{lat: 30.8756133, lng: -101.571342 }},{location: {lat: 30.8650913, lng: -101.6466300}},{ location: {lat: 30.739580, lng:-101.659839}}]
-
-function displayRoute(origin, destination, service, display) {
-    service.route(
-        {
-            origin: origin,
-            destination: destination,
-            waypoints: testPoints,
-            travelMode: google.maps.TravelMode.DRIVING,
-            avoidTolls: true,
-        },
-        (result, status) => {
-            if (status === "OK") {
-                display.setDirections(result);
-            } else {
-                alert("Could not display directions due to: " + status);
-            }
-        }
-    );
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    markers.push(marker);
 }
 
-function computeTotalDistance(result) {
-    let total = 0;
-    const myroute = result.routes[0];
-
-    for (let i = 0; i < myroute.legs.length; i++) {
-        total += myroute.legs[i].distance.value;
-    }
-    total = total / 1000;
-    document.getElementById("total").innerHTML = total + " km";
-}
 
 // SEARCH FOR CITY WITH WAYPOINTS IN BETWEEN
 // function calculateAndDisplayRoute(directionsService, directionsRenderer) {
