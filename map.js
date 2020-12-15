@@ -189,13 +189,11 @@ function initMap() {
 
 }
 
-var realPoints = [{lat: 34.70855568389723, lng: -116.15676579807831},
-    {location: {lat: 34.711715049229205, lng: -116.141402104841}},
-    {location: {lat: 34.71256170726018, lng: -116.1245792898996}},
-    {location: {lat: 34.70698771594072, lng: -116.11058888767792}},
-    {location: {lat: 34.70035488249111, lng: -116.11239133213593}},
-    {location: {lat: 34.69936696818374, lng: -116.12998662327362}},
-    {location: {lat: 34.703177429805066, lng: -116.14818272923065}}]
+var realPoints = [{lat: 34.70171128524146, lng: -116.14878354404999}, {lat: 34.70324799225423, lng: -116.141402104841}, {lat: 34.70120165679538, lng: -116.12518010471894}, {lat: 34.705929320728494, lng: -116.1165112051828}]
+
+var mapRealPoints = realPoints.map(n => '{location: ' + n + '}');
+
+console.log(mapRealPoints)
 
 var testPoints = [ {location:{lat: 30.8756133, lng: -101.571342 }},{location: {lat: 30.8650913, lng: -101.6466300}},{ location: {lat: 30.739580, lng:-101.659839}}]
 
@@ -204,7 +202,7 @@ function displayRoute(origin, destination, service, display) {
         {
             origin: origin,
             destination: destination,
-            waypoints: realPoints,
+            waypoints: mapRealPoints,
             travelMode: google.maps.TravelMode.DRIVING,
             avoidTolls: true,
         },
