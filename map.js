@@ -67,26 +67,7 @@
 //     );
 // }
 //
-// var testPoints = [ {location:{lat: 30.8756133, lng: -101.571342 }},{location: {lat: 30.8650913, lng: -101.6466300}},{ location: {lat: 30.739580, lng:-101.659839}}]
-//
-// function displayRoute(origin, destination, service, display) {
-//     service.route(
-//         {
-//             origin: origin,
-//             destination: destination,
-//             waypoints: testPoints,
-//             travelMode: google.maps.TravelMode.DRIVING,
-//             avoidTolls: true,
-//         },
-//         (result, status) => {
-//             if (status === "OK") {
-//                 display.setDirections(result);
-//             } else {
-//                 alert("Could not display directions due to: " + status);
-//             }
-//         }
-//     );
-// }
+
 
 // function computeTotalDistance(result) {
 //     let total = 0;
@@ -179,24 +160,64 @@ function initMap() {
         document.getElementById('longclicked').innerHTML =  event.latLng.lng();
     });
 
-
+    var currentId = 0;
+    var uniqueId = function() {
+        return ++currentId;
+    }
+    var objLoc = {};
     // Create new marker on single click event on the map
     google.maps.event.addListener(map,'click',function(event) {
+        var id = uniqueId(); // get new id
         var marker = new google.maps.Marker({
-          position: event.latLng,
-          map: map,
-          title: event.latLng.lat()+', '+event.latLng.lng()
+            id: id,
+            position: event.latLng,
+            map: map,
+            title: event.latLng.lat()+', '+event.latLng.lng()
 
         });
         var obj = {};
-        obj["Latitude"] = event.latLng.lat();
-        obj["Longitude"] = event.latLng.lng();
+
+        obj["lat"] = event.latLng.lat();
+        obj["lng"] = event.latLng.lng();
         markers.push(obj);
+        Object.assign(objLoc, obj)
+
+        console.log(objLoc)
         console.log(markers)
     });
 
 
 }
+
+var realPoints = [{lat: 34.70855568389723, lng: -116.15676579807831},
+    {location: {lat: 34.711715049229205, lng: -116.141402104841}},
+    {location: {lat: 34.71256170726018, lng: -116.1245792898996}},
+    {location: {lat: 34.70698771594072, lng: -116.11058888767792}},
+    {location: {lat: 34.70035488249111, lng: -116.11239133213593}},
+    {location: {lat: 34.69936696818374, lng: -116.12998662327362}},
+    {location: {lat: 34.703177429805066, lng: -116.14818272923065}}]
+
+var testPoints = [ {location:{lat: 30.8756133, lng: -101.571342 }},{location: {lat: 30.8650913, lng: -101.6466300}},{ location: {lat: 30.739580, lng:-101.659839}}]
+
+function displayRoute(origin, destination, service, display) {
+    service.route(
+        {
+            origin: origin,
+            destination: destination,
+            waypoints: realPoints,
+            travelMode: google.maps.TravelMode.DRIVING,
+            avoidTolls: true,
+        },
+        (result, status) => {
+            if (status === "OK") {
+                display.setDirections(result);
+            } else {
+                alert("Could not display directions due to: " + status);
+            }
+        }
+    );
+}
+
 
 // // Adds a marker to the map and push to the array.
 // function addMarker(location) {
