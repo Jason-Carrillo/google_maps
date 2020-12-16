@@ -83,22 +83,7 @@
 // var map;
 
 //
-// function initMap() {
-//     var lat_lng = {lat: 34.7062978, lng:  -116.1274117};
-//
-//     map = new google.maps.Map(document.getElementById('map'), {
-//         zoom: 7,
-//         center: lat_lng,
-//     });
-//
-//     // This event listener will call addMarker() when the map is clicked.
-//     map.addListener('click', function(event) {
-//         addMarker(event.latLng);
-//     });
-//
-//     // Adds a marker at the center of the map.
-//     addMarker(lat_lng);
-// }
+
 
 
 
@@ -118,9 +103,29 @@
 
 var map;
 var markers = [];
-
 // TEST COORDINATES
 // {lat: 34.7062978, lng: -116.1274117}
+
+
+
+function initMap() {
+    var lat_lng = {lat: 34.7062978, lng:  -116.1274117};
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: lat_lng,
+    });
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function(event) {
+        addMarker(event.latLng);
+    });
+
+    // Adds a marker at the center of the map.
+    addMarker(lat_lng);
+}
+
+
 
 
 
@@ -242,186 +247,64 @@ var markers = [];
 
 
 // // Adds a marker to the map and push to the array.
-// function addMarker(location) {
-//     var marker = new google.maps.Marker({
-//         position: location,
-//         map: map
-//     });
-//
-// }
-
-
-
-// SEARCH FOR CITY WITH WAYPOINTS IN BETWEEN
-// function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-//     const waypts = [];
-//     const checkboxArray = document.getElementById("waypoints");
-//
-//     for (let i = 0; i < checkboxArray.length; i++) {
-//         if (checkboxArray.options[i].selected) {
-//             waypts.push({
-//                 location: checkboxArray[i].value,
-//                 stopover: true,
-//             });
-//         }
-//     }
-//     directionsService.route(
-//         {
-//             origin: document.getElementById("start").value,
-//             destination: document.getElementById("end").value,
-//             waypoints: waypts,
-//             optimizeWaypoints: true,
-//             travelMode: google.maps.TravelMode.DRIVING,
-//         },
-//         (response, status) => {
-//             if (status === "OK") {
-//                 directionsRenderer.setDirections(response);
-//                 const route = response.routes[0];
-//                 const summaryPanel = document.getElementById("directions-panel");
-//                 summaryPanel.innerHTML = "";
-//
-//                 // For each route, display summary information.
-//                 for (let i = 0; i < route.legs.length; i++) {
-//                     const routeSegment = i + 1;
-//                     summaryPanel.innerHTML +=
-//                         "<b>Route Segment: " + routeSegment + "</b><br>";
-//                     summaryPanel.innerHTML += route.legs[i].start_address + " to ";
-//                     summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
-//                     summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
-//                 }
-//             } else {
-//                 window.alert("Directions request failed due to " + status);
-//             }
-//         }
-//     );
-// }
-
-// function calculateAndDisplayRouteConverse(directionsService, directionsRenderer) {
-//
-//     directionsService.route(
-//         {
-//             origin: "Converse, TX",
-//             destination: "Converse, TX",
-//             waypoints: [{
-//                 location: "San Marcos, TX",
-//                 stopover: true,
-//             }, {
-//                 location: "Johnson, TX",
-//                 stopover: true,
-//             }],
-//             optimizeWaypoints: true,
-//             travelMode: google.maps.TravelMode.DRIVING,
-//         },
-//         (response, status) => {
-//             if (status === "OK") {
-//                 directionsRenderer.setDirections(response);
-//                 const route = response.routes[0];
-//                 const summaryPanel = document.getElementById("directions-panel");
-//                 summaryPanel.innerHTML = "";
-//
-//                 // For each route, display summary information.
-//                 for (let i = 0; i < route.legs.length; i++) {
-//                     const routeSegment = i + 1;
-//                     summaryPanel.innerHTML +=
-//                         "<b>Route Segment: " + routeSegment + "</b><br>";
-//                     summaryPanel.innerHTML += route.legs[i].start_address + " to ";
-//                     summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
-//                     summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
-//                 }
-//             } else {
-//                 window.alert("Directions request failed due to " + status);
-//             }
-//         }
-//     );
-// }
-//
-//
-// function calculateAndDisplayRouteElPaso(directionsService, directionsRenderer) {
-//     directionsService.route(
-//         {
-//             origin: "El Paso, TX",
-//             destination: "El Paso, TX",
-//             waypoints: [{
-//                 location: "Ruidoso, NM",
-//                 stopover: true,
-//             }, {
-//                 location: "Las Cruces, NM",
-//                 stopover: true,
-//             }],
-//             optimizeWaypoints: true,
-//             travelMode: google.maps.TravelMode.DRIVING,
-//         },
-//         (response, status) => {
-//             if (status === "OK") {
-//                 directionsRenderer.setDirections(response);
-//                 const route = response.routes[0];
-//                 const summaryPanel = document.getElementById("directions-panel");
-//                 summaryPanel.innerHTML = "";
-//
-//                 // For each route, display summary information.
-//                 for (let i = 0; i < route.legs.length; i++) {
-//                     const routeSegment = i + 1;
-//                     summaryPanel.innerHTML +=
-//                         "<b>Route Segment: " + routeSegment + "</b><br>";
-//                     summaryPanel.innerHTML += route.legs[i].start_address + " to ";
-//                     summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
-//                     summaryPanel.innerHTML += route.legs[i].distance.text + "<br><br>";
-//                 }
-//             } else {
-//                 window.alert("Directions request failed due to " + status);
-//             }
-//         }
-//     );
-// }
-
-
-function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 4,
-        center: {lat: 34.7062978, lng: -116.1274117},
-    });
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer({
-        draggable: true,
-        map,
-        panel: document.getElementById("right-panel"),
+function addMarker(location) {
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
     });
 
-    displayRoute(
-        "El Paso, TX",
-        "Dallas, TX",
-        directionsService,
-        directionsRenderer
-    );
 }
 
-var realPoints = [{lat: 34.70171128524146, lng: -116.14878354404999}, {
-    lat: 34.70324799225423,
-    lng: -116.141402104841
-}, {lat: 34.70120165679538, lng: -116.12518010471894}, {lat: 34.705929320728494, lng: -116.1165112051828}]
 
-function displayRoute(origin, destination, service, display) {
-    realPoints = realPoints.map(n => {
-        const markerMapped = {location: n};
-        return markerMapped
-    });
-    console.log(realPoints)
+function displayRouteWithPoints() {
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: {lat: 34.7062978, lng: -116.1274117},
+        });
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer({
+            draggable: true,
+            map,
+            panel: document.getElementById("right-panel"),
+        });
 
-    service.route(
-        {
-            origin: origin,
-            destination: destination,
-            waypoints: realPoints,
-            travelMode: google.maps.TravelMode.DRIVING,
-            avoidTolls: true,
-        },
-        (result, status) => {
-            if (status === "OK") {
-                display.setDirections(result);
-            } else {
-                alert("Could not display directions due to: " + status);
+        displayRoute(
+            "El Paso, TX",
+            "Dallas, TX",
+            directionsService,
+            directionsRenderer
+        );
+    }
+
+    var realPoints = [{lat: 34.70171128524146, lng: -116.14878354404999}, {
+        lat: 34.70324799225423,
+        lng: -116.141402104841
+    }, {lat: 34.70120165679538, lng: -116.12518010471894}, {lat: 34.705929320728494, lng: -116.1165112051828}]
+
+    function displayRoute(origin, destination, service, display) {
+        markers = realPoints.map(n => {
+            const markerMapped = {location: n};
+            return markerMapped
+        });
+        console.log(realPoints)
+
+        service.route(
+            {
+                origin: origin,
+                destination: destination,
+                waypoints: markers,
+                travelMode: google.maps.TravelMode.DRIVING,
+                avoidTolls: true,
+            },
+            (result, status) => {
+                if (status === "OK") {
+                    display.setDirections(result);
+                } else {
+                    alert("Could not display directions due to: " + status);
+                }
             }
-        }
-    );
+        );
+    }
 }
 
