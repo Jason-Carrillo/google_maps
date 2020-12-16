@@ -1,3 +1,6 @@
+
+
+
 // TESTING DIRECTIONS POINT A TO B
 
 // function initMap() {
@@ -110,7 +113,7 @@
 function initMap() {
 
     var map;
-    var markers = [];
+
     var marker = new google.maps.Marker({
         position: {lat: 34.7062978, lng: -116.1274117},
         map: map,
@@ -158,6 +161,7 @@ function initMap() {
         });
 
     }
+    var markers = [];
     var objLoc = {};
     // Create new marker on single click event on the map
     google.maps.event.addListener(map, 'click', function (event) {
@@ -181,22 +185,65 @@ function initMap() {
         console.log(markers)
     });
 
+
+        function initMapRoute() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: {lat: 34.7062978, lng: -116.1274117},
+            });
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({
+                draggable: true,
+                map,
+                panel: document.getElementById("right-panel"),
+            });
+
+            displayRoute(
+                markers[0],
+                markers[markers.length-1],
+                directionsService,
+                directionsRenderer
+            );
+        }
+
+
+
+        function displayRoute(origin, destination, service, display) {
+            markers = markers.map(n => {
+                const markerMapped = {location: n};
+                return markerMapped
+            });
+            console.log(markers)
+
+            service.route(
+                {
+                    origin: origin,
+                    destination: destination,
+                    waypoints: markers,
+                    travelMode: google.maps.TravelMode.DRIVING,
+                    avoidTolls: true,
+                },
+                (result, status) => {
+                    if (status === "OK") {
+                        display.setDirections(result);
+                    } else {
+                        alert("Could not display directions due to: " + status);
+                    }
+                }
+            );
+        }
+
+    $(function(){
+        $( "#testbtn" ).on( 'click', initMapRoute);
+    });
+
+    function testLog(){
+        console.log(markers)
+    }
+
+
+    //Closing Brace of INITMAP
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -247,52 +294,17 @@ var realPoints = [{lat: 34.70171128524146, lng: -116.14878354404999}, {
 }, {lat: 34.70120165679538, lng: -116.12518010471894}, {lat: 34.705929320728494, lng: -116.1165112051828}]
 
 
-function displayRouteWithPoints() {
-    function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 4,
-            center: {lat: 34.7062978, lng: -116.1274117},
-        });
-        const directionsService = new google.maps.DirectionsService();
-        const directionsRenderer = new google.maps.DirectionsRenderer({
-            draggable: true,
-            map,
-            panel: document.getElementById("right-panel"),
-        });
-
-        displayRoute(
-            "El Paso, TX",
-            "Dallas, TX",
-            directionsService,
-            directionsRenderer
-        );
-    }
 
 
 
-    function displayRoute(origin, destination, service, display) {
-        markers = markers.map(n => {
-            const markerMapped = {location: n};
-            return markerMapped
-        });
-        console.log(markers)
 
-        service.route(
-            {
-                origin: origin,
-                destination: destination,
-                waypoints: markers,
-                travelMode: google.maps.TravelMode.DRIVING,
-                avoidTolls: true,
-            },
-            (result, status) => {
-                if (status === "OK") {
-                    display.setDirections(result);
-                } else {
-                    alert("Could not display directions due to: " + status);
-                }
-            }
-        );
-    }
-}
+
+
+// document.getElementById("testbtn").addEventListener("click", notify());
+
+// $("testbtn").on("click", displayRouteWithPoints())
+
+
+
+
 
