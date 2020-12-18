@@ -120,7 +120,7 @@ function initMap() {
 
     });
 
-    var lat_lng = {lat: 34.7062978, lng:  -116.1274117};
+    var lat_lng = { lat: 29.4241, lng: -98.4936 };
 
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 7,
@@ -133,7 +133,7 @@ function initMap() {
     });
 
     // Adds a marker at the center of the map.
-    addMarker(lat_lng);
+    // addMarker(lat_lng);
 
     // Update lat/long value of div when you move the mouse over the map
     google.maps.event.addListener(map, 'mousemove', function (event) {
