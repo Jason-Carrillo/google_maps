@@ -13,7 +13,6 @@ function initMap() {
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     const waypts = [];
-
     for (let i = 0; i < markers.length; i++) {
         waypts.push({
                 location: markers[i],
