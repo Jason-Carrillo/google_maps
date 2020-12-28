@@ -22,8 +22,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     }
     directionsService.route(
         {
-            origin: "El Paso, TX",
-            destination: "Dallas, TX",
+            origin: "Dallas, TX",
+            destination: "El Paso, TX",
             waypoints: waypts,
             optimizeWaypoints: true,
             travelMode: google.maps.TravelMode.DRIVING,
