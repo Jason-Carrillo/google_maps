@@ -1,64 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-    <title>Simple Map</title>
-    <meta name=“viewport” content=“initial-scale=1.0">
-    <meta charset=“utf-8”>
-    <link rel="stylesheet" type="text/css" href="./style.css" />
-</head>
+    <head>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCMpJ-NawmnjMOSlkw5uXkLYjDTSzEmvag&callback=initMap"
+                async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+        <script src="testing.js"></script>
+        <link rel="stylesheet" type="text/css" href="./style.css" />
+    </head>
 <body>
-<input
-        id="pac-input"
-        class="controls"
-        type="text"
-        placeholder="Search Box"
-/>
-<div id='map'></div>
-<script>
-    var geocoder;
-    var map;
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
-        });
-    }
+<div id="map"></div>
+<div id="right-panel">
+    <div>
 
-    function initAutocomplete() {
-        const map = new google.maps.Map(
-            document.getElementById("map"),
-            {
-                center: {lat: -33.8688, lng: 151.2195},
-                zoom: 13,
-                mapTypeId: "roadmap",
-            }
-        )
-    };
-
-    const input = document.getElementById("pac-input");
-    const searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-
-    function codeAddress() {
-        var address = document.getElementById('address').value;
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status === 'OK') {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }
-
-</script>
-
-
+        <input type="submit" id="testbtn" />
+    </div>
+    <div id="directions-panel"></div>
+</div>
 </body>
 </html>
