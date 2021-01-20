@@ -75,29 +75,6 @@ function initMap() {
         );
         calculateAndDisplayRoute(directionsService, directionsRenderer);
     }
-    function displayRoute(origin, destination, service, display) {
-
-        console.log("{location: {lat: " + markers[0].location.lat + ", lng: " + markers[0].location.lng + " }}");
-
-        document.getElementById("coordinates").value = markersString;
-        console.log(markers)
-        service.route(
-            {
-                origin: origin,
-                destination: destination,
-                waypoints: markers,
-                travelMode: google.maps.TravelMode.DRIVING,
-                avoidTolls: true,
-            },
-            (result, status) => {
-                if (status === "OK") {
-                    display.setDirections(result);
-                } else {
-                    alert("Could not display directions due to: " + status);
-                }
-            }
-        );
-    }
 
 
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
