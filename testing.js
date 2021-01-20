@@ -20,18 +20,6 @@ function initMap() {
     document.getElementById("distance").value = "";
     document.getElementById("time").value = "";
 
-    // Adds a marker at the center of the map.
-    // addMarker(lat_lng);
-    // Update lat/long value of div when you move the mouse over the map
-    // google.maps.event.addListener(map, 'mousemove', function (event) {
-    //     document.getElementById('latmoved').innerHTML = event.latLng.lat();
-    //     document.getElementById('longmoved').innerHTML = event.latLng.lng();
-    // });
-    // Update lat/long value of div when the marker is clicked
-    // marker.addListener('click', function (event) {
-    //     document.getElementById('latclicked').innerHTML = event.latLng.lat();
-    //     document.getElementById('longclicked').innerHTML = event.latLng.lng();
-    // });
     var currentId = 0;
     var uniqueId = function () {
         return ++currentId;
