@@ -76,19 +76,7 @@ function initMap() {
         calculateAndDisplayRoute(directionsService, directionsRenderer);
     }
     function displayRoute(origin, destination, service, display) {
-        markers = markers.map(n => {
-            const markerMapped = {location: n};
-            return markerMapped
-        });
 
-        console.log(markers[0].location.lat)
-
-        let markersString = [];
-        for(let i = 0; i < markers.length; i++){
-
-            markersString.push("{location: {lat: " + markers[i].location.lat + ", lng: " + markers[i].location.lng + " }}");
-            console.log(markersString)
-        }
         console.log("{location: {lat: " + markers[0].location.lat + ", lng: " + markers[0].location.lng + " }}");
 
         document.getElementById("coordinates").value = markersString;
@@ -114,6 +102,20 @@ function initMap() {
 
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         const waypts = [];
+
+        markers = markers.map(n => {
+            const markerMapped = {location: n};
+            return markerMapped
+        });
+
+        console.log(markers[0].location.lat)
+
+        let markersString = [];
+        for(let i = 0; i < markers.length; i++){
+
+            markersString.push("{location: {lat: " + markers[i].location.lat + ", lng: " + markers[i].location.lng + " }}");
+            console.log(markersString)
+        }
 
         for (let i = 1; i < markers.length; i++) {
             waypts.push({
