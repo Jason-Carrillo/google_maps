@@ -20,18 +20,6 @@ function initMap() {
     document.getElementById("distance").value = "";
     document.getElementById("time").value = "";
 
-    // Adds a marker at the center of the map.
-    // addMarker(lat_lng);
-    // Update lat/long value of div when you move the mouse over the map
-    // google.maps.event.addListener(map, 'mousemove', function (event) {
-    //     document.getElementById('latmoved').innerHTML = event.latLng.lat();
-    //     document.getElementById('longmoved').innerHTML = event.latLng.lng();
-    // });
-    // Update lat/long value of div when the marker is clicked
-    // marker.addListener('click', function (event) {
-    //     document.getElementById('latclicked').innerHTML = event.latLng.lat();
-    //     document.getElementById('longclicked').innerHTML = event.latLng.lng();
-    // });
     var currentId = 0;
     var uniqueId = function () {
         return ++currentId;
@@ -79,15 +67,13 @@ function initMap() {
             panel: document.getElementById("right-panel"),
         });
         console.log(markers)
-        displayRoute(
-            markers[0],
-            markers[markers.length-1],
-            directionsService,
-            directionsRenderer
-        );
         calculateAndDisplayRoute(directionsService, directionsRenderer);
     }
-    function displayRoute(origin, destination, service, display) {
+
+
+    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+        const waypts = [];
+
         markers = markers.map(n => {
             const markerMapped = {location: n};
             return markerMapped
@@ -101,31 +87,6 @@ function initMap() {
             markersString.push("{location: {lat: " + markers[i].location.lat + ", lng: " + markers[i].location.lng + " }}");
             console.log(markersString)
         }
-        console.log("{location: {lat: " + markers[0].location.lat + ", lng: " + markers[0].location.lng + " }}");
-
-        document.getElementById("coordinates").value = markersString;
-        console.log(markers)
-        service.route(
-            {
-                origin: origin,
-                destination: destination,
-                waypoints: markers,
-                travelMode: google.maps.TravelMode.DRIVING,
-                avoidTolls: true,
-            },
-            (result, status) => {
-                if (status === "OK") {
-                    display.setDirections(result);
-                } else {
-                    alert("Could not display directions due to: " + status);
-                }
-            }
-        );
-    }
-
-
-    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-        const waypts = [];
 
         for (let i = 1; i < markers.length; i++) {
             waypts.push({
