@@ -67,12 +67,6 @@ function initMap() {
             panel: document.getElementById("right-panel"),
         });
         console.log(markers)
-        displayRoute(
-            markers[0],
-            markers[markers.length-1],
-            directionsService,
-            directionsRenderer
-        );
         calculateAndDisplayRoute(directionsService, directionsRenderer);
     }
 
